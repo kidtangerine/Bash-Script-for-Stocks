@@ -4,6 +4,6 @@ if [ -z "$1" ]
 then
 echo usage ./stock ticker
 else
-RESULT="$(curl -s $API/stock/$1/quote | jq .changePercent)"
+RESULT="$(curl -s $API/stock/$1/quote?displayPercent=true | jq .changePercent,.latestPrice )"
 echo "% $RESULT"
 fi

@@ -1,8 +1,9 @@
 #!/bin/bash
-source variables
+API=https://api.iextrading.com/1.0
 if [ -z "$1" ] 
 then
 echo usage ./stock ticker
 else
-curl -s $API/stock/$1/quote | jq .delayedPrice 
+RESULT="$(curl -s $API/stock/$1/quote | jq .changePercent)"
+echo "% $RESULT"
 fi

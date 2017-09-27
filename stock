@@ -1,9 +1,8 @@
 #!/bin/bash
-
-result=$(curl -ss https://www.google.com/finance?q=NYSE%3A$1 | awk '/priceChangePercent/{getline;print}' | sed -e 's/content=\"/ /' -e 's/"\ \/>/%/')
-if [ -z "$result" ]
-then 
-	echo "Stock Not Found"
-else 
-echo $result
+source variables
+if [ -z "$1" ] 
+then
+echo usage ./stock ticker
+else
+curl -s $API/stock/$1/quote | jq .delayedPrice 
 fi
